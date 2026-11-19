@@ -38,7 +38,13 @@
 /* ---------- Базовые стили ---------- */
 *, *::before, *::after { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; scroll-padding-top: calc(var(--header-h) + 12px); -webkit-text-size-adjust: 100%; }
+html { scroll-behavior: smooth; scroll-padding-top: calc(var(--header-h) + 12px); -webkit-text-size-adjust: 100%; overflow-x: hidden; }
+
+/* Запрет горизонтального «качания» страницы на телефонах (iOS Safari игнорирует overflow только у body) */
+html, body { max-width: 100%; }
+@supports (overflow: clip) {
+  html, body { overflow-x: clip; }
+}
 
 body {
   margin: 0;
@@ -47,7 +53,6 @@ body {
   line-height: 1.7;
   color: var(--text);
   background: var(--cream);
-  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -142,7 +147,7 @@ em { font-style: italic; }
 .deco { position: absolute; color: var(--grey-300); pointer-events: none; z-index: 0; }
 .deco--hero-hand { width: 260px; height: 260px; left: -40px; bottom: 40px; opacity: .55; }
 .deco--hero-bottle { width: 62px; height: 92px; right: -12px; top: 18%; color: var(--grey-500); opacity: .5; }
-.deco--about-pusher { width: 30px; height: 150px; right: -6px; top: -30px; color: var(--grey-500); opacity: .45; transform: rotate(18deg); }
+.deco--about-pusher { width: 30px; height: 150px; right: 10px; top: -30px; color: var(--grey-500); opacity: .45; transform: rotate(18deg); }
 .deco--stats-file { width: 34px; height: 170px; right: 8%; top: -40px; color: rgba(255, 255, 255, .14); transform: rotate(-28deg); }
 .deco--growth-nail { width: 120px; height: 190px; right: 4%; top: 60px; opacity: .6; }
 .deco--cta-hand { width: 240px; height: 240px; right: -30px; bottom: -40px; color: rgba(255, 255, 255, .08); }
@@ -260,7 +265,7 @@ em { font-style: italic; }
 /* =========================================================
    ОБО МНЕ
    ========================================================= */
-.about { background: var(--white); }
+.about { background: var(--white); overflow: hidden; }
 .about__grid { display: grid; grid-template-columns: .95fr 1.05fr; gap: clamp(40px, 7vw, 110px); align-items: center; }
 
 .about__photos { position: relative; padding: 0 70px 90px 0; max-width: 520px; }
